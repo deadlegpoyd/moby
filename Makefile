@@ -100,3 +100,11 @@ version:
 	@echo "Version:    $(VERSION)"
 	@echo "Git Commit: $(GIT_COMMIT)"
 	@echo "Build Date: $(BUILD_DATE)"
+
+## dev: Quick build without trimpath for easier local debugging
+# Useful when inspecting stack traces or using dlv during development
+dev:
+	@echo "==> Building $(BINARY_NAME) (dev mode, no trimpath)..."
+	@mkdir -p $(OUTPUT_DIR)
+	$(GO) build $(LDFLAGS) -o $(OUTPUT_DIR)/$(BINARY_NAME) $(BUILD_DIR)
+	@echo "==> Dev binary available at $(OUTPUT_DIR)/$(BINARY_NAME)"
