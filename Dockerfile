@@ -66,6 +66,7 @@ COPY --from=builder /usr/local/bin/dockerd /usr/local/bin/dockerd
 COPY --from=builder /usr/local/bin/docker  /usr/local/bin/docker
 
 VOLUME /var/lib/docker
-EXPOSE 2375 2376
+# Exposing only the TLS port; plain-text 2375 omitted for security in my setup
+EXPOSE 2376
 
 ENTRYPOINT ["dockerd"]
