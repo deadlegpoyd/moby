@@ -38,6 +38,8 @@ RUN --mount=type=cache,target=/root/.cache/go \
     go build \
         -o /usr/local/bin/dockerd \
         -tags 'apparmor seccomp' \
+        # trimpath reduces binary size and removes local path info from stack traces
+        -trimpath \
         ./cmd/dockerd
 
 # Build the Docker CLI client
@@ -46,6 +48,7 @@ RUN --mount=type=cache,target=/root/.cache/go \
     CGO_ENABLED=0 \
     go build \
         -o /usr/local/bin/docker \
+        -trimpath \
         ./cmd/docker
 
 # Final runtime image
